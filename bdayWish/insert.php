@@ -9,8 +9,8 @@
 <body>
     <form action="function.php" method="POST">
     Friends Name<input type="text" name="name"><br> 
-    Your Email<input type="email" name="email"><br> 
-    Your Mobile<input type="mobile" name="mobile"><br> 
+    Your Email Add<input type="email" name="email"><br> 
+    Your Mobile No<input type="mobile" name="mobile"><br> 
     Birthdate<input type="datetime-local" name="dates"><br> 
     <input type="submit" name="submit"><br> 
     </form>
