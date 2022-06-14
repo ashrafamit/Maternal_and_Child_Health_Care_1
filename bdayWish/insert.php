@@ -11,7 +11,7 @@
     Friends Name<input type="text" name="name"><br> 
     Your Email<input type="email" name="email"><br> 
     Your Mobile<input type="mobile" name="mobile"><br> 
-    Date of Birth<input type="datetime-local" name="dates"><br> 
+    Birthdate<input type="datetime-local" name="dates"><br> 
     <input type="submit" name="submit"><br> 
     </form>
 
