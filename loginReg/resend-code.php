@@ -1,13 +1,15 @@
 <?php
+session_start();
+include('dbcon.php');
+
+
+
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\SMTP;
 
-//Load Composer's autoloader
 require 'vendor/autoload.php';
-
-
-function sendemail_verify($name, $email, $verify_token)
+function resend_email_verify($name, $email, $verify_token)
 {
     $mail = new PHPMailer(true);
 
@@ -36,7 +38,7 @@ function sendemail_verify($name, $email, $verify_token)
 
     //Content
     $mail->isHTML(true);                                                    //Set email format to HTML
-    $mail->Subject = 'Email Verification From Funda of Web IT';
+    $mail->Subject = 'Resend - Email Verification From Funda of Web IT';
     //$mail->Body    = 'This is the HTML message body <b>in bold!</b>';
     //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
@@ -51,6 +53,51 @@ function sendemail_verify($name, $email, $verify_token)
     $mail->send();
     // echo 'Message has been sent';
 
+}
+
+
+if(isset($_POST['resend_email_btn'])){
+    
+    if(!empty(trim($_POST['email']))){
+
+        $email = mysqli_real_escape_string($con, $_POST['email']);
+
+        $check_email_query = "SELECT * FROM users WHERE email ='$email' LIMIT 1";
+        $check_email_query_run = mysqli_query($con, $check_email_query);
+
+        if(mysqli_num_rows($check_email_query_run) > 0){
+
+            $row = mysqli_fetch_array($check_email_query_run);
+            if($row['verify_status'] == '0'){
+                
+                $name = $row['name'];
+                $email = $row['email'];
+                $verify_token = $row['verify_token'];
+                
+                resend_email_verify($name, $email, $verify_token);
+                $_SESSION['status'] = "Verfication email link has been sent to yout email address.";
+                header("Location: login.php");
+                exit(0);
+
+            }
+            else{
+                $_SESSION['status'] = "Email is already verified. Please login now.";
+                header("Location: resend-email-verification.php");
+                exit(0);
+            }
+
+        }
+        else{
+            $_SESSION['status'] = "Email is not registered. Please register now.";
+            header("Location: register.php");
+            exit(0);
+        }   
+    }
+    else{
+        $_SESSION['status'] = "Please enter the email field";
+        header("Location: resend-email-verification.php");
+        exit(0);
+    }
 }
 
 ?>

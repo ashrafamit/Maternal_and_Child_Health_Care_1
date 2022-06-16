@@ -17,6 +17,6 @@
 
 
     <button><a href="showTable.php">show users to send reminder</a></button>
-    <button><a href="simple.php">send reminder</a></button>
+    <button><a href="send_mail.php">send reminder</a></button>
 </body>
 </html>

@@ -49,6 +49,7 @@ include('includes/navbar.php');
 
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary" name="loginnow">Login Now</button>
+                                <a href="passward-reset.php" class="float-end">Forgot Your Password ?</a>
                             </div>
                         </form>
 

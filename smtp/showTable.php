@@ -29,5 +29,5 @@
         ?>
 
     </table>
-    <button><a href="simple.php">send reminder</a></button>
+    <button><a href="send_mail.php">send reminder</a></button>
 </div>
